@@ -2,7 +2,11 @@
   font-family: sans-serif;
   text-align: center;
 }
-
-div {
-  margin: 25px;
+.container {
+  display: flex;
+  justify-content: center;
+}
+.halfGold {
+  color: gold;
+  width: 17.3px;
 }

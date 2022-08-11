@@ -55,6 +55,6 @@ export default function RockGame(props) {
       {/* Winner Score */}
       <div>User Score: {userWin}</div>
       <div>Computer Score: {comWin}</div>
-    </>
+      </>
   );
 }
