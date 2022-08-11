@@ -7,19 +7,27 @@ export default function StarRating(props) {
   const { starCount } = props;
   const count = props.starCount === 5 || props.starCount === 10 ? starCount : 5;
 
-  const [clickCount, setCounter] = useState(0);
-
-  const handleClick = (e, givenRating) => {
+  const [clickCount, setCounter] = useState(0);  
+  const [prev, setPrev] = useState(0);
+  const handleClick = (index, givenRating) => {
     setCounter((val) => val + 1);
-    if (clickCount !== 1) {
+    //condition for half star
+    if (clickCount !== 1 ) {
       setRate(givenRating - 0.5);
-      // setTimeout(() => {
-
-      // }, 2000);
-    } else if (clickCount >= 1) {
+      setPrev(index)
+      
+    }
+    //condition for repetative half star
+    else if(prev!==index && clickCount==1){        
+      setRate(givenRating - 0.5);
+      setPrev(index)
+      setCounter(1)
+    }
+    //condition for full star
+     else if (clickCount >= 1) {
       setRate(givenRating);
-      console.log("double click");
       setCounter(0);
+      setPrev(-1)
     }
   };
   const [rate, setRate] = useState();
@@ -31,11 +39,11 @@ export default function StarRating(props) {
           const givenRating = index + 1;
           return (
             <label key={index} style={{ margin: "5px" }}>
-              <button
-                value={rate}
-                onClick={(e) => {
-                  handleClick(e, givenRating);
+              <button                   
+                onClick={() => {
+                  handleClick(index, givenRating);
                 }}
+                value={rate}
                 style={{ display: "none", width: "20px" }}
               />
               <div style={{ cursor: "pointer" }}>
@@ -52,7 +60,7 @@ export default function StarRating(props) {
                     )}
                   </>
                 ) : (
-                  <AiOutlineStar fill={"gold"} />
+                  <AiOutlineStar fill={"gold"} /> 
                 )}
               </div>
             </label>
