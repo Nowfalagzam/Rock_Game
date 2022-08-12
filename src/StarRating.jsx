@@ -63,6 +63,7 @@ export default function StarRating(props) {
                   <AiOutlineStar fill={"gold"} /> 
                 )}
               </div>
+              <div style={{ fontSize:"smaller"}}>{index+1}</div>
             </label>
           );
         })}
